@@ -2,11 +2,19 @@
 
 1. 設輸入為'`3+5`'
 
+   * 輸出結果為:
+   
+      * t0=3
+      * t1=5
+      * t2=t0+t1
+
 2. 首先進入parse(argv[1]); 
 
     * argv[0]是"./exp0",為了取得運算式`3+5`,要取argc[1]
 
-3. parse中,`3+5`被設為token
+3. parse中,`3+5`被設為token,並呼叫E()
+
+4. 
 ### exp0hack.c
 
 ### exp0var.c
