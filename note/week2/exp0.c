@@ -84,6 +84,6 @@ int main(int argc, char * argv[]) {
   printf("E=F ([+-] F)*\n");
   printf("F=Number | '(' E ')'\n");
   printf("==== parse:%s ========\n", argv[1]);
-  parse(argv[1]);//argv[0]是"./exp0",為了取得運算式(E.g."3+5"),要取argc[1]
+  parse(argv[1]);//argv[0]是"./exp0",為了取得運算式(E.g."3+5"),要取argv[1]
 }
 

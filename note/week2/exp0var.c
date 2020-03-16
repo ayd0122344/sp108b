@@ -35,7 +35,7 @@ int nextTemp() {
   return tempIdx++;
 }
 
-//exp0var比exp0hack多了一個isdigit來檢查是變數或是常數--變數的話是 D=M ,常數的話是 D=A
+//exp0var比exp0hack多了一個isdigit()來檢查是變數或是常數--變數的話是 D=M ,常數的話是 D=A
 void genOp1(int i, char c) {
   printf("# t%d=%c\n", i, c);
   // t1=3 轉成 @3; D=A; @t1; M=D
