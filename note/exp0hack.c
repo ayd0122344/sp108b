@@ -3,41 +3,60 @@
 #include <string.h>
 #include <ctype.h>
 
-int tokenIdx = 0;//紀錄看到第幾個字
+int tokenIdx = 0;
 char *tokens;
 
 int E();
 int F();
 
-//有任何錯誤時,印出錯誤訊息
 void error(char *msg) {
   printf("%s", msg);
-  assert(0);//讓程式停掉離開
+  assert(0);
 }
 
-//取得目前字元
 char ch() {
   char c = tokens[tokenIdx];
   return c;
 }
 
-//取得目前字元,同時進入下一格
 char next() {
   char c = ch();
   tokenIdx++;
   return c;
 }
 
-//讓程式初始化
 int isNext(char *set) {
   char c = ch();
   return (c!='\0' && strchr(set, c)!=NULL);
 }
 
-//產生下一個臨時變數的代號EX: 0 代表 t0,3 代表 t3
 int nextTemp() {
-  static int tempIdx = 0;//static只會讓這行執行一次
+  static int tempIdx = 0;
   return tempIdx++;
+}
+
+//exp0是輸出中間碼,exp0hack是將中間碼再編譯成hackCPU所使用的組合語言
+//exp0hack多了 genOp1 和 genOp2
+
+//輸出如t1=3的結果
+void genOp1(int i, char c) {
+  printf("# t%d=%c\n", i, c);
+  // t1=3 轉成 @3; D=A; @t1; M=D
+  printf("@%c\n", c);
+  printf("D=A\n");
+  printf("@t%d\n", i);
+  printf("M=D\n");
+}
+//輸出如t0=t1+t2的結果
+void genOp2(int i, int i1, char op, int i2) {
+  printf("# t%d=t%d%ct%d\n", i, i1, op, i2);
+  // t0=t1+t2 轉成 @t1; D=M; @t2; D=D+M; @t0; M=D;
+  printf("@t%d\n", i1);
+  printf("D=M\n");
+  printf("@t%d\n", i2);
+  printf("D=D%cM\n", op);
+  printf("@t%d\n", i);
+  printf("M=D\n");
 }
 
 // F =  Number | '(' E ')'
@@ -47,11 +66,11 @@ int F() {
   if (isdigit(c)) {
     next(); // skip c
     f = nextTemp();
-    printf("t%d=%c\n", f, c);
+    genOp1(f, c);
   } else if (c=='(') { // '(' E ')'
     next();
     f = E();
-    assert(ch()==')');//確認還要一個"("
+    assert(ch()==')');
     next();
   } else {
     error("F = (E) | Number fail!");
@@ -66,7 +85,7 @@ int E() {
     char op=next();
     int i2 = F();
     int i = nextTemp();
-    printf("t%d=t%d%ct%d\n", i, i1, op, i2);
+    genOp2(i, i1, op, i2);
     i1 = i;
   }
   return i1;
@@ -76,9 +95,8 @@ void parse(char *str) {
   tokens = str;
   E();
 }
-//argc:參數的個數argument counter;argv:參數的陣列argument variable
+
 int main(int argc, char * argv[]) {
-  printf("argv[0]=%s argv[1]=%s\n", argv[0], argv[1]);
   printf("=== EBNF Grammar =====\n");
   printf("E=F ([+-] F)*\n");
   printf("F=Number | '(' E ')'\n");
