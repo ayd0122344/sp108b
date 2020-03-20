@@ -106,7 +106,7 @@ void IF() {
     skip("else");
     STMT();
   }
-  emit("L%d\n", End);//產生goto
+  emit("L%d\n", End);
 }
 
 // STMT = WHILE | BLOCK | ASSIGN
