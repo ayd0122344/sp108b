@@ -1,20 +1,22 @@
 # Compiler.c - 3/18作業
 
-## 解題方法
+## 解題思維
 
-  1. 寫下期望的中間碼成果
+1. 寫下期望的中間碼成果
   
-  2. 思考Label個數
+2. 思考Label個數
     
-    1. `goto elseBegin` : 判斷式之後需加上此label
+  1. `goto elseBegin`: 判斷式之後需加上此label
     
-      * 不符合判斷式則goto elseBegin
+    * 不符合判斷式則goto elseBegin
       
-      * 符合則繼續執行下一行程式碼
+    * 符合則繼續執行下一行程式碼
       
-    2. `End` : 加入else下方
+  2. `End`: 加入else下方
     
-      * 如果進入if之後的判斷式成立，則執行完判斷式之後的Block應跳過else結束，不可進入else
+    * 如果進入if之後的判斷式成立，則執行完判斷式之後的Block應跳過else結束，不可進入else
+    
+  3. 其餘跟while概念相同
 ## 執行方式
 
 * PS C:\Users\nan\Desktop\系統程式\sp108b\note\week3\03-compiler> `mingw32-make`
