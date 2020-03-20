@@ -6,13 +6,13 @@
   
 2. 思考Label個數
     
-  1. `goto elseBegin`: 判斷式之後需加上此label。
+  ** `goto elseBegin`: 判斷式之後需加上此label。
     
    * 不符合判斷式則goto elseBegin
       
    * 符合則繼續執行下一行程式碼
       
-  2. `End`: 加入else下方
+  **  `End`: 加入else下方
     
    * 如果進入if之後的判斷式成立，則執行完判斷式之後的Block應跳過else結束，不可進入else
     
