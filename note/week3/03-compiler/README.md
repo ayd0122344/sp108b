@@ -20,10 +20,14 @@
   
 ## 執行方式
 
-* PS C:\Users\nan\Desktop\系統程式\sp108b\note\week3\03-compiler> `mingw32-make`
+* 使用mingw32-make編譯多個C語言檔案:
+
+   * PS C:\Users\nan\Desktop\系統程式\sp108b\note\week3\03-compiler> `mingw32-make`
 gcc -std=c99 -O0 lexer.c compiler.c main.c -o compiler
 
-* PS C:\Users\nan\Desktop\系統程式\sp108b\note\week3\03-compiler> `./compiler test/if.c`
+* 執行測試資料夾中的if.c: 
+
+  * PS C:\Users\nan\Desktop\系統程式\sp108b\note\week3\03-compiler> `./compiler test/if.c`
 
 ## 執行結果-if
 
