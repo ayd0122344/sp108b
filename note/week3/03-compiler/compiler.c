@@ -106,7 +106,7 @@ void IF() {
     skip("else");
     STMT();
   }
-  emit("L%d\n", End);
+  emit("(L%d)\n", End);
 }
 
 // STMT = WHILE | BLOCK | ASSIGN
