@@ -4,7 +4,7 @@
 
 ### 05-compiler資料夾內檔案關係圖
 
-![](https://github.com/ayd0122344/sp108b/blob/master/week4/compilerChart.jpg)
+![](https://github.com/ayd0122344/sp108b/blob/master/week4/Image/compilerChart.jpg)
 
 這麼多檔案的關係是因為模組化，程式執行的時候會一直呼叫檔案，方便之後要做管理——
 
