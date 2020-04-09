@@ -72,6 +72,11 @@
 
 ![](https://github.com/ayd0122344/sp108b/blob/master/week4/Image/irvm2.png)
 
+## 成果理解
+
+![](https://github.com/ayd0122344/sp108b/blob/master/week4/Image/irDump%E7%90%86%E8%A7%A3.png)
+![](https://github.com/ayd0122344/sp108b/blob/master/week4/Image/irR%E7%90%86%E8%A7%A3.png)
+
 ### 組譯器: asm.c 之筆記
 
 > 執行方式: mingw32-make => ./asm ../test/Add
