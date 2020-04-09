@@ -12,7 +12,9 @@
 
 但相對的閱讀起來就很吃力，大概類似看一個故事直接從結局開始看，根本不知道主角的前因後果，還要一直往前翻那樣XDDD
 
-### 閱讀05-compiler-run之心得
+### 編譯器:05-compiler-run之心得
+
+> 執行方式: mingw32-make => ./compiler test/sum.c -ir 或 ./compiler test/sum.c -run
 
 1. 觀察compiler.c檔 : 發現主要的函式(STMT、WHILE、ASSIGN、E()、F()...)跟上周的03-compiler比起來多了呼叫ir的模組來emit程式碼。
 
@@ -61,4 +63,9 @@
         ```
 
         * 結論: 使用->時，左邊必須為欲訪問之結構體指標
+
+### 組譯器: asm.c 之心得
+
+
+
 
