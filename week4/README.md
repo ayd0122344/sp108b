@@ -87,5 +87,11 @@
 
 >> 執行方式: mingw32-make => ./asm ../test/sum
 
+* PASS1 => 記住符號位址
+
+
+
+* PASS2 => 真正編碼
+
 
 
