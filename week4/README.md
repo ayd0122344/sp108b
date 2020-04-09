@@ -87,11 +87,15 @@
 
 >> 執行方式: mingw32-make => ./asm ../test/sum
 
-* PASS1 => 記住符號位址
+### 成果理解
 
+![](https://github.com/ayd0122344/sp108b/blob/master/week4/Image/asmPass1.png)
 
+![](https://github.com/ayd0122344/sp108b/blob/master/week4/Image/asmPass2.png)
 
-* PASS2 => 真正編碼
+![](https://github.com/ayd0122344/sp108b/blob/master/week4/Image/asmParse.png)
+
+![](https://github.com/ayd0122344/sp108b/blob/master/week4/Image/asmCode2Bin.png)
 
 
 
