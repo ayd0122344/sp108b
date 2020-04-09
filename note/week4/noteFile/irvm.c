@@ -6,7 +6,7 @@ int L[VAR_MAX];
 int v[VAR_MAX];
 int t[VAR_MAX] = { 0 };//負責存臨時變數
 
-int *varLookup(char *name) {//查表程式，以便查出變數
+int *varLookup(char *name) {//查表函式，以便查出變數
   int h = mapFindIdx(&varMap, name);
   return &v[h];
 }
@@ -31,10 +31,10 @@ int irOp2(int a, char *op, int b) {
 }
 
 int irExec(int i) {
-  IR *p = &ir[i];
-  char *op = p->op;
-  int pc = i + 1;
-  trace("%02d: ", i);
+  IR *p = &ir[i];//p為一IR結構體指標，指向方才於ir.h宣告的ir陣列。
+  char *op = p->op;//將ir陣列中的op以指標的方式訪問並存為字串。
+  int pc = i + 1;//程式計數器+1。
+  trace("%02d: ", i);//補充:類似C的printf，但trace只有才除錯狀態下才會有輸出，而printf在任何狀態都有輸出。
   if (eq(op, "s=t")) {
     int *vp = varLookup(p->s);
     *vp = t[p->t];
