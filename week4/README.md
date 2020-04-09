@@ -2,7 +2,7 @@
 
 > noteFile資料夾下的檔案為部分抓取以便老師閱讀註解部分，並非全部檔案故不可執行！
 
-### 05-compiler資料夾內檔案關係圖
+## 05-compiler資料夾內檔案關係圖
 
 ![](https://github.com/ayd0122344/sp108b/blob/master/week4/Image/compilerChart.jpg)
 
@@ -12,7 +12,7 @@
 
 但相對的閱讀起來就很吃力，大概類似看一個故事直接從結局開始看，根本不知道主角的前因後果，還要一直往前翻那樣XDDD
 
-### 編譯器:05-compiler-run之筆記
+## 編譯器:05-compiler-run之筆記
 
 > 執行方式: mingw32-make => ./compiler test/sum.c -ir 或 ./compiler test/sum.c -run
 
@@ -72,7 +72,12 @@
 
 ![](https://github.com/ayd0122344/sp108b/blob/master/week4/Image/irvm2.png)
 
-### 組譯器: asm.c 之筆記
+### 成果理解
+
+![](https://github.com/ayd0122344/sp108b/blob/master/week4/Image/irDump%E7%90%86%E8%A7%A3.png)
+![](https://github.com/ayd0122344/sp108b/blob/master/week4/Image/irRun%E7%90%86%E8%A7%A3.png)
+
+## 組譯器: asm.c 之筆記
 
 > 執行方式: mingw32-make => ./asm ../test/Add
 
