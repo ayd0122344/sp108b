@@ -4,7 +4,7 @@
 
 ### 05-compiler資料夾內檔案關係圖
 
-![](https://github.com/ayd0122344/sp108b/blob/master/note/week4/compilerChart.jpg)
+![](https://github.com/ayd0122344/sp108b/blob/master/week4/compilerChart.jpg)
 
 這麼多檔案的關係是因為模組化，程式執行的時候會一直呼叫檔案，方便之後要做管理——
 
@@ -18,7 +18,11 @@
 
 1. 觀察compiler.c檔 : 發現主要的函式(STMT、WHILE、ASSIGN、E()、F()...)跟上周的03-compiler比起來多了呼叫ir的模組來emit程式碼。
 
+![](https://github.com/ayd0122344/sp108b/blob/master/week4/Image/compiler.png)
+
 2. 觀察ir.h檔: 裡面定義了一個名為"IR"的陣列結構，其中包含了目標參數、臨時參數、標記以及運算子。並在下方使用此結構宣告了一個陣列ir[]。
+
+![](https://github.com/ayd0122344/sp108b/blob/master/week4/Image/ir.png)
 
 3. 觀察定義emit功能ir.c檔 : 
 
@@ -63,6 +67,10 @@
         ```
 
         * 結論: 使用->時，左邊必須為欲訪問之結構體指標
+        
+![](https://github.com/ayd0122344/sp108b/blob/master/week4/Image/irvm1.png)
+
+![](https://github.com/ayd0122344/sp108b/blob/master/week4/Image/irvm2.png)
 
 ### 組譯器: asm.c 之心得
 
