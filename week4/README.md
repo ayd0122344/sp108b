@@ -81,6 +81,11 @@
 
 > 執行方式: mingw32-make => ./asm ../test/Add
 
+###成果理解
+
+![](https://github.com/ayd0122344/sp108b/blob/master/week4/Image/PASS2.png)
+
+>> 執行方式: mingw32-make => ./asm ../test/sum
 
 
 
