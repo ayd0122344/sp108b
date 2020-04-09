@@ -1,10 +1,17 @@
 > 本篇作為一個大綱整理，其餘詳情編寫在程式碼旁邊以便參照
 
+註解入口:
+1. https://github.com/ayd0122344/sp108b/blob/master/note/week2/exp0.c
+
+2. https://github.com/ayd0122344/sp108b/blob/master/note/week2/exp0hack.c
+
+3. https://github.com/ayd0122344/sp108b/blob/master/note/week2/exp0var.c
+
 # exp0.c
 
 ## 理解3+5的過程
 
-1. 設輸入為'`3+5`'
+1. 設輸入為'`3+5`'：
 
    * 輸出結果為:
    
@@ -14,27 +21,27 @@
 
 2. 首先進入  parse(argv[1]);
 
-    * argv[0]是"./exp0"，為了取得運算式`3+5`，要取argv[1]
+    * argv[0]是"./exp0"，為了取得運算式`3+5`，要取argv[1]。
 
-3. parse中，`3+5`被設為tokens，並呼叫E()
+3. parse中，`3+5`被設為tokens，並呼叫E()。
 
-4. E() 中，i1呼叫F()
+4. E() 中，i1呼叫F()。
 
-5. F() 中
+5. F() 中：
 
-    1. c呼叫了 ch() 來取得目前字元，並判斷是否為數字 -- 是的話 nextTemp()產生新變數作為位址(如`3+5`取得3，nextTemp()則產生0，`t0`的0)
+    1. c呼叫了 ch() 來取得目前字元，並判斷是否為數字 -- 是的話 nextTemp()產生新變數作為位址(如`3+5`取得3，nextTemp()則產生0，`t0`的0)。
   
-    2. 印出 t0=3
+    2. 印出 t0=3。
   
-    3. 回到 E()
+    3. 回到 E()。
   
-6. isNext("+-")判斷運算式的下一個字元是否為 + 或 - (一樣由 ch()去取得)
+6. isNext("+-")判斷運算式的下一個字元是否為 + 或 - (一樣由 ch()去取得)。
 
-    * 如3+5，op 設為在此則被設為`+`
+    * 如3+5，op 設為在此則被設為`+`。
   
-7. i2再次呼叫 F()，同第5點所述，最後印出t1=5
+7. i2再次呼叫 F()，同第5點所述，最後印出t1=5。
 
-8. 最後由`printf("t%d=t%d%ct%d\n", i, i1, op, i2);`印出
+8. 最後由`printf("t%d=t%d%ct%d\n", i, i1, op, i2);`印出。
 
 ## 筆記
 
@@ -48,13 +55,13 @@
 
 # exp0hack.c
 
-* 大致與exp0相同，但exp0是輸出中間碼，exp0hack是將中間碼再編譯成hackCPU所使用的組合語言
+* 大致與exp0相同，但exp0是輸出中間碼，exp0hack是將中間碼再編譯成hackCPU所使用的組合語言。
 
-* exp0hack多了 genOp1 和 genOp2來做組合語言的輸出
+* exp0hack多了 genOp1 和 genOp2來做組合語言的輸出。
 
 ***
 
 # exp0var.c
 
-* 大致與exp0hack相同，但genOp1多了一個`isdigit()`來檢查是變數或是常數--變數的話是 D=M ，常數的話是 D=A
+* 大致與exp0hack相同，但genOp1多了一個`isdigit()`來檢查是變數或是常數--變數的話是 D=M ，常數的話是 D=A。
 
