@@ -12,7 +12,7 @@
 
 但相對的閱讀起來就很吃力，大概類似看一個故事直接從結局開始看，根本不知道主角的前因後果，還要一直往前翻那樣XDDD
 
-### 編譯器:05-compiler-run之心得
+### 編譯器:05-compiler-run之筆記
 
 > 執行方式: mingw32-make => ./compiler test/sum.c -ir 或 ./compiler test/sum.c -run
 
@@ -72,7 +72,9 @@
 
 ![](https://github.com/ayd0122344/sp108b/blob/master/week4/Image/irvm2.png)
 
-### 組譯器: asm.c 之心得
+### 組譯器: asm.c 之筆記
+
+> 執行方式: mingw32-make => ./asm ../test/Add
 
 
 
