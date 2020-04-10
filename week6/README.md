@@ -16,4 +16,20 @@
 
 1. 指令記憶體、資料記憶體大小
 
+![](https://github.com/ayd0122344/sp108b/blob/master/week6/Image/vmM.png)
+
 2. main()
+
+![](https://github.com/ayd0122344/sp108b/blob/master/week6/Image/vmMain.png)
+
+3.Run()
+
+![](https://github.com/ayd0122344/sp108b/blob/master/week6/Image/vmRun1.png)
+
+![](https://github.com/ayd0122344/sp108b/blob/master/week6/Image/vmRun2.png)
+
+![](https://github.com/ayd0122344/sp108b/blob/master/week6/Image/vmRun3.png)
+
+補充圖片
+
+![](https://github.com/ayd0122344/sp108b/blob/master/week6/Image/syntax.jpg)
