@@ -42,5 +42,7 @@
 
 2. sum.bin
 
-![](https://github.com/ayd0122344/sp108b/blob/master/week6/Image/addResult.png)
+![](https://github.com/ayd0122344/sp108b/blob/master/week6/Image/sumResult.png)
+
+![](https://github.com/ayd0122344/sp108b/blob/master/week6/Image/sumResult2.png)
 
