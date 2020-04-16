@@ -36,3 +36,11 @@
 
 * 執行結果探討
 
+1. add.bin
+
+![](https://github.com/ayd0122344/sp108b/blob/master/week6/Image/addResult.png)
+
+2. sum.bin
+
+![](https://github.com/ayd0122344/sp108b/blob/master/week6/Image/addResult.png)
+
