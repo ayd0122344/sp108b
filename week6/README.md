@@ -46,3 +46,27 @@
 
 ![](https://github.com/ayd0122344/sp108b/blob/master/week6/Image/sumResult2.png)
 
+### 工具鏈 : gcc 在x86上的組合語言之筆記
+
+* 執行方式
+
+```
+
+PS D:\ccc\sp\code\c\03-asmVm\gcc\01-add> gcc main.c add.c -o add
+PS D:\ccc\sp\code\c\03-asmVm\gcc\01-add> ./add
+add(5, 8)=13
+PS D:\ccc\sp\code\c\03-asmVm\gcc\01-add> gcc -S add.c -o add.s
+
+(有註解版本)
+PS D:\ccc\sp\code\c\03-asmVm\gcc\01-add> gcc -fverbose-asm -S add.c -o add.s
+PS D:\ccc\sp\code\c\03-asmVm\gcc\01-add> gcc -fverbose-asm -S main.c -o main.s
+
+```
+
+* 理解過程
+
+觀察add.s檔案
+
+![](https://github.com/ayd0122344/sp108b/blob/master/week6/Image/addx86.png)
+
+![](https://github.com/ayd0122344/sp108b/blob/master/week6/Image/addx86-2.png)
