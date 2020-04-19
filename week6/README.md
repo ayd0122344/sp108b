@@ -48,7 +48,7 @@
 
 ## 工具鏈 : gcc 在x86上的組合語言之筆記
 
-* 執行方式
+* add.s & main.s產生方式
 
 ```
 
@@ -65,8 +65,27 @@ PS D:\ccc\sp\code\c\03-asmVm\gcc\01-add> gcc -fverbose-asm -S main.c -o main.s
 
 * 理解過程
 
-觀察add.s檔案
+ - add.s檔案觀察結果
 
 ![](https://github.com/ayd0122344/sp108b/blob/master/week6/Image/addx86.png)
 
 ![](https://github.com/ayd0122344/sp108b/blob/master/week6/Image/addx86-2.png)
+
+* x86之堆疊- foorbar.c 執行與理解
+
+* 產生方式
+
+```
+
+連結網址: https://eli.thegreenplace.net/.../where-the-top-of-the...
+
+PS D:\ccc\sp\code\c\03-asmVm\gcc\00-foobar> gcc -fverbose-asm -S foobar.c -o foobar.s
+
+```
+![](https://github.com/ayd0122344/sp108b/blob/master/week6/Image/x86stack.png)
+
+> foobar.c的組合語言與大部分同add.s的寫法，在此不再贅述。
+
+[可參考陳鍾成老師對foobar.c的組合語言註解](https://github.com/ccccourse/sp/tree/master/code/c/03-asmVm/gcc/00-foobar)
+
+
