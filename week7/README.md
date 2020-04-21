@@ -43,7 +43,7 @@ sum = 30
 
 ![](https://github.com/ayd0122344/sp108b/blob/master/week7/Image/inline.png)
 
-## 05-globalCall 之筆記
+## 05-globalCall 之筆記 -使用全域變數時，變數可直接存取，不需要透過框架暫存器
 
 * 執行方式
 
@@ -53,6 +53,34 @@ PS D:\ccc\sp\code\c\03-asmVm\gcc\05-globalcall> gcc -S globalCall.c -o globalCal
 PS D:\ccc\sp\code\c\03-asmVm\gcc\05-globalcall> gcc globalCall.c -o globalCall
 PS D:\ccc\sp\code\c\03-asmVm\gcc\05-globalcall> ./globalCall
 add(5, 8)=13
+
+```
+
+* 重點部分節錄
+
+```
+_a:
+	.long	5                   # 宣告a為長整數5
+	.globl	_b
+	.align 4                    # 32位元4個byte
+_b:
+	.long	8
+	.comm	_c, 4, 2            # c沒有被定義，所以放在comm中
+	.text
+	.globl	_add
+	.def	_add;	.scl	2;	.type	32;	.endef
+_add:
+	pushl	%ebp
+	movl	%esp, %ebp          # 使用全域變數時，變數可直接存取，不需要透過框架暫存器
+	movl	_a, %edx
+	movl	_b, %eax
+	addl	%edx, %eax
+	movl	%eax, _c
+	nop
+	popl	%ebp
+	ret
+	.def	___main;	.scl	2;	.type	32;	.endef
+	.section .rdata,"dr"
 
 ```
 
