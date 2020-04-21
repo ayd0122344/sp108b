@@ -84,8 +84,8 @@ PS D:\ccc\sp\code\c\03-asmVm\gcc\00-foobar> gcc -fverbose-asm -S foobar.c -o foo
 ```
 ![](https://github.com/ayd0122344/sp108b/blob/master/week6/Image/x86stack.png)
 
-> foobar.c的組合語言與大部分同add.s的寫法，在此不再贅述。
+> 00-foobar、02-sum的組合語言與大部分同add.s的寫法，在此不再贅述。
 
 [可參考陳鍾成老師對foobar.c的組合語言註解](https://github.com/ccccourse/sp/tree/master/code/c/03-asmVm/gcc/00-foobar)
 
-
+[可參考陳鍾成老師對sum.c的組合語言註解](https://github.com/ccccourse/sp/blob/master/code/c/03-asmVm/gcc/02-sum)
