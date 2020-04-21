@@ -1,6 +1,6 @@
 # week7筆記
 
-## 03-fib筆記
+## 03-fib 之筆記 - Fibonacci
 
 ### 執行方式
 
@@ -28,4 +28,32 @@ https://github.com/ccccourse/sp/tree/master/code/c/03-asmVm/gcc/03-fib?fbclid=Iw
 
 ![](https://github.com/ayd0122344/sp108b/blob/master/week7/Image/fib.png)
 
-## 04-inline筆記
+## 04-inline 之筆記 - 內嵌組合語言寫法
+
+* 執行方式
+
+```
+
+PS D:\ccc\sp\code\c\03-asmVm\gcc\04-inline> gcc inline.c -o inline
+PS D:\ccc\sp\code\c\03-asmVm\gcc\04-inline> ./inline
+sum = 30
+
+```
+* 對inline.c之理解
+
+![](https://github.com/ayd0122344/sp108b/blob/master/week7/Image/inline.png)
+
+## 05-globalCall 之筆記
+
+* 執行方式
+
+```
+
+PS D:\ccc\sp\code\c\03-asmVm\gcc\05-globalcall> gcc -S globalCall.c -o globalCall.s
+PS D:\ccc\sp\code\c\03-asmVm\gcc\05-globalcall> gcc globalCall.c -o globalCall
+PS D:\ccc\sp\code\c\03-asmVm\gcc\05-globalcall> ./globalCall
+add(5, 8)=13
+
+```
+
+

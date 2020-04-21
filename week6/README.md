@@ -46,7 +46,7 @@
 
 ![](https://github.com/ayd0122344/sp108b/blob/master/week6/Image/sumResult2.png)
 
-## 工具鏈 : gcc 在x86上的組合語言之筆記
+## 01-add之筆記
 
 * add.s & main.s產生方式
 
