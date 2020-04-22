@@ -1,160 +1,26 @@
-# Compiler
+# 3/25作業 -為 05-compiler-run 加上 IF 的語法，並測試看看執行是否正確！
 
-main.c => lexer.c
-          compiler.c
-          ir.c       => irvm.c
+## 解題思維
 
-```
-PS D:\ccc\course\sp\code\c\02-compiler\05-compiler-run> ./compiler test/sum.c -run
-===================irRun()=======================
-00: t1 = 0 (0)
-01: s = t1 (0)
-02: t1 = 1 (1)
-03: i = t1 (1)
-04: (L1) (4)
-05: t2 = i (1)
-06: t3 = 10 (10)
-07: t4 = t2 <= t3 (1)
-08: ifnot t4 (1)  -- fail
-09: t1 = s (0)
-10: t2 = i (1)
-11: t3 = t1 + t2 (1)
-12: s = t3 (1)
-13: t1 = i (1)
-14: t2 = 1 (1)
-15: t3 = t1 + t2 (2)
-16: i = t3 (2)
-17: goto L1 (4)
-04: (L1) (4)
-05: t2 = i (2)
-06: t3 = 10 (10)
-07: t4 = t2 <= t3 (1)
-08: ifnot t4 (1)  -- fail
-09: t1 = s (1)
-10: t2 = i (2)
-11: t3 = t1 + t2 (3)
-12: s = t3 (3)
-13: t1 = i (2)
-14: t2 = 1 (1)
-15: t3 = t1 + t2 (3)
-16: i = t3 (3)
-17: goto L1 (4)
-04: (L1) (4)
-05: t2 = i (3)
-06: t3 = 10 (10)
-07: t4 = t2 <= t3 (1)
-08: ifnot t4 (1)  -- fail
-09: t1 = s (3)
-10: t2 = i (3)
-11: t3 = t1 + t2 (6)
-12: s = t3 (6)
-13: t1 = i (3)
-14: t2 = 1 (1)
-15: t3 = t1 + t2 (4)
-16: i = t3 (4)
-17: goto L1 (4)
-04: (L1) (4)
-05: t2 = i (4)
-06: t3 = 10 (10)
-07: t4 = t2 <= t3 (1)
-08: ifnot t4 (1)  -- fail
-09: t1 = s (6)
-10: t2 = i (4)
-11: t3 = t1 + t2 (10)
-12: s = t3 (10)
-13: t1 = i (4)
-14: t2 = 1 (1)
-15: t3 = t1 + t2 (5)
-16: i = t3 (5)
-17: goto L1 (4)
-04: (L1) (4)
-05: t2 = i (5)
-06: t3 = 10 (10)
-07: t4 = t2 <= t3 (1)
-08: ifnot t4 (1)  -- fail
-09: t1 = s (10)
-10: t2 = i (5)
-11: t3 = t1 + t2 (15)
-12: s = t3 (15)
-13: t1 = i (5)
-14: t2 = 1 (1)
-15: t3 = t1 + t2 (6)
-16: i = t3 (6)
-17: goto L1 (4)
-04: (L1) (4)
-05: t2 = i (6)
-06: t3 = 10 (10)
-07: t4 = t2 <= t3 (1)
-08: ifnot t4 (1)  -- fail
-09: t1 = s (15)
-10: t2 = i (6)
-11: t3 = t1 + t2 (21)
-12: s = t3 (21)
-13: t1 = i (6)
-14: t2 = 1 (1)
-15: t3 = t1 + t2 (7)
-16: i = t3 (7)
-17: goto L1 (4)
-04: (L1) (4)
-05: t2 = i (7)
-06: t3 = 10 (10)
-07: t4 = t2 <= t3 (1)
-08: ifnot t4 (1)  -- fail
-09: t1 = s (21)
-10: t2 = i (7)
-11: t3 = t1 + t2 (28)
-12: s = t3 (28)
-13: t1 = i (7)
-14: t2 = 1 (1)
-15: t3 = t1 + t2 (8)
-16: i = t3 (8)
-17: goto L1 (4)
-04: (L1) (4)
-05: t2 = i (8)
-06: t3 = 10 (10)
-07: t4 = t2 <= t3 (1)
-08: ifnot t4 (1)  -- fail
-09: t1 = s (28)
-10: t2 = i (8)
-11: t3 = t1 + t2 (36)
-12: s = t3 (36)
-13: t1 = i (8)
-14: t2 = 1 (1)
-15: t3 = t1 + t2 (9)
-16: i = t3 (9)
-17: goto L1 (4)
-04: (L1) (4)
-05: t2 = i (9)
-06: t3 = 10 (10)
-07: t4 = t2 <= t3 (1)
-08: ifnot t4 (1)  -- fail
-09: t1 = s (36)
-10: t2 = i (9)
-11: t3 = t1 + t2 (45)
-12: s = t3 (45)
-13: t1 = i (9)
-14: t2 = 1 (1)
-15: t3 = t1 + t2 (10)
-16: i = t3 (10)
-17: goto L1 (4)
-04: (L1) (4)
-05: t2 = i (10)
-06: t3 = 10 (10)
-07: t4 = t2 <= t3 (1)
-08: ifnot t4 (1)  -- fail
-09: t1 = s (45)
-10: t2 = i (10)
-11: t3 = t1 + t2 (55)
-12: s = t3 (55)
-13: t1 = i (10)
-14: t2 = 1 (1)
-15: t3 = t1 + t2 (11)
-16: i = t3 (11)
-17: goto L1 (4)
-04: (L1) (4)
-05: t2 = i (11)
-06: t3 = 10 (10)
-07: t4 = t2 <= t3 (0)
-08: ifnot t4 (0) goto L2 (18)
-18: (L2) (18)
-```
+同https://github.com/ayd0122344/sp108b/tree/master/week3/HW-03-compiler
+
+## 注意重點
+
+![](https://github.com/ayd0122344/sp108b/blob/master/week4/Image/Hw0.jpg)
+
+## 執行方式
+
+* 使用mingw32-make編譯多個C語言檔案:
+
+   * PS C:\Users\nan\Desktop\系統程式\sp108b\note\week3\03-compiler> `mingw32-make`
+gcc -std=c99 -O0 lexer.c compiler.c main.c -o compiler
+
+* 執行測試資料夾中的if.c: 
+
+  * PS C:\Users\nan\Desktop\系統程式\sp108b\note\week3\03-compiler> `./compiler test/if.c`
+
+## 執行結果-if
+
+![](https://github.com/ayd0122344/sp108b/blob/master/week4/Image/Hw1.jpg)
+
+![](https://github.com/ayd0122344/sp108b/blob/master/week4/Image/Hw2.jpg)

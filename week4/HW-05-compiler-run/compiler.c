@@ -117,7 +117,7 @@ void WHILE() {
   skip("(");
   int e = E();
   irEmitIfNotGoto(e, whileEnd);
-  // emit("goif T%d L%d\n", whileEnd, e);
+  // emit("goif T%d L%d\n", e, whileEnd);
   skip(")");
   STMT();
   irEmitGoto(whileBegin);
@@ -126,11 +126,34 @@ void WHILE() {
   // emit("(L%d)\n", whileEnd);
 }
 
+// IF = if (E) STMT ( else STMT)?
+void IF() {
+  int elseBegin = nextLabel();//產生標記使用nextLabel()
+  int End = nextLabel();
+  skip("if");
+  skip("(");
+  int e = E();
+  irEmitIfNotGoto(e, elseBegin);
+  // emit("if not t%d goto L%d\n", e, elseBegin);//產生中間碼
+  skip(")");
+  STMT();
+  irEmitGoto(End);
+  //emit("goto L%d\n", End);//產生goto
+  irEmitLabel(elseBegin);
+  //emit("(L%d)\n", elseBegin);
+  if(isNext("else")){
+    skip("else");
+    STMT();
+  }
+  irEmitLabel(End);
+  //emit("(L%d)\n", End);
+}
+
 void STMT() {
   if (isNext("while"))
     WHILE();
-  // else if (isNext("if"))
-  //   IF();
+  else if (isNext("if"))
+    IF();
   else if (isNext("{"))
     BLOCK();
   else {
