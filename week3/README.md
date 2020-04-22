@@ -2,7 +2,7 @@
 
 * 3/18作業入口
 
-https://github.com/ayd0122344/sp108b/tree/master/note/week3/HW-03-compiler
+[點我進入](https://github.com/ayd0122344/sp108b/tree/master/note/week3/HW-03-compiler)
 
 * 其他相關筆記
 
