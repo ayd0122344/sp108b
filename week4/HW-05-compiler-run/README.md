@@ -6,7 +6,7 @@
 
 ## 注意重點
 
-![](https://github.com/ayd0122344/sp108b/blob/master/week4/Image/Hw0.jpg)
+![](https://github.com/ayd0122344/sp108b/blob/master/week4/Image/Hw0.png)
 
 ## 執行方式
 
@@ -21,6 +21,6 @@ gcc -std=c99 -O0 lexer.c compiler.c main.c -o compiler
 
 ## 執行結果-if
 
-![](https://github.com/ayd0122344/sp108b/blob/master/week4/Image/Hw1.jpg)
+![](https://github.com/ayd0122344/sp108b/blob/master/week4/Image/Hw1.png)
 
-![](https://github.com/ayd0122344/sp108b/blob/master/week4/Image/Hw2.jpg)
+![](https://github.com/ayd0122344/sp108b/blob/master/week4/Image/Hw2.png)
