@@ -212,7 +212,7 @@ TARGET = run
 all: $(TARGET)							# 1.先執行all，遇到$(TARGET)去找對應值(run)
 
 $(TARGET): sum.c main.c						# 2.執行此行並觸發下一行的$(CC) $(CFLAGS) $^ -o $@動作
-	$(CC) $(CFLAGS) $^ -o $@				# $(CC)代表gcc, $(CFLAGS)代表-std=c99 -O0, 													# $^此處代表sum.c main.c, $@此處代表$(TARGET)也就是run
+	$(CC) $(CFLAGS) $^ -o $@				# $(CC)代表gcc, $(CFLAGS)代表-std=c99 -O0, 												# $^此處代表sum.c main.c, $@此處代表$(TARGET)也就是run
 
 clean:
 	rm -f *.o
