@@ -1,6 +1,8 @@
 # week4筆記
 
-> noteFile資料夾下的檔案為部分抓取以便老師閱讀註解部分，並非全部檔案故不可執行！
+## 3/25作業入口
+
+* [點我進入](https://github.com/ayd0122344/sp108b/tree/master/week4/HW-05-compiler-run)
 
 ## 05-compiler資料夾內檔案關係圖
 
