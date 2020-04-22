@@ -266,12 +266,12 @@ gcc -std=c99 -O0 libstat.a main.o -L ./ -lstat -o run		# 將libstat.a和main.o�
 ```
 * 執行順序:
 
-1. 做$(TARGET)觸發$(TARGET): $(LIB) main.o
+1. 做$(TARGET)觸發$(TARGET): $(LIB) main.o。
 
-2. 做$(LIB)觸發$(AR) -r $@ $^所以執行`ar -r libstat.a sum.o`
+2. 做$(LIB)觸發$(AR) -r $@ $^所以執行`ar -r libstat.a sum.o`。
 
-3. 做完AR也就是做完$(LIB)之後，回到$(TARGET): $(LIB) main.o來做main.o
+3. 做完AR也就是做完$(LIB)之後，回到$(TARGET): $(LIB) main.o來做main.o。
 
-4. main.o觸發%.o: %.c做	$(CC) $(CFLAGS) -c $< -o $@ 動作 => `gcc -std=c99 -O0 -c main.c -o main.o`
+4. main.o觸發%.o: %.c做	$(CC) $(CFLAGS) -c $< -o $@ 動作 => `gcc -std=c99 -O0 -c main.c -o main.o`。
 
-5. 然後回到$(TARGET): $(LIB) main.o做$(CC) $(CFLAGS) $^ -L ./ -lstat -o $@動作 => `gcc -std=c99 -O0 libstat.a main.o -L ./ -lstat -o run`
+5. 然後回到$(TARGET): $(LIB) main.o做$(CC) $(CFLAGS) $^ -L ./ -lstat -o $@動作 => `gcc -std=c99 -O0 libstat.a main.o -L ./ -lstat -o run`。
