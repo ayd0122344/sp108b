@@ -205,14 +205,14 @@ sum(10)=55
 	* `$?`：代表需要重建（被修改）的相依性項目。
 
 ```
-CC := gcc						# 前3行做定義變數的動作
-CFLAGS = -std=c99 -O0			# "O0"代表不做最佳化
+CC := gcc							# 前3行做定義變數的動作
+CFLAGS = -std=c99 -O0						# "O0"代表不做最佳化
 TARGET = run
 
-all: $(TARGET)					# 1.先執行all，遇到$(TARGET)去找對應值(run)
+all: $(TARGET)							# 1.先執行all，遇到$(TARGET)去找對應值(run)
 
-$(TARGET): sum.c main.c			# 2.執行此行並觸發下一行的$(CC) $(CFLAGS) $^ -o $@動作
-	$(CC) $(CFLAGS) $^ -o $@	# $(CC)代表gcc, $(CFLAGS)代表-std=c99 -O0, 												# $^此處代表sum.c main.c, $@此處代表$(TARGET)也就是run
+$(TARGET): sum.c main.c						# 2.執行此行並觸發下一行的$(CC) $(CFLAGS) $^ -o $@動作
+	$(CC) $(CFLAGS) $^ -o $@				# $(CC)代表gcc, $(CFLAGS)代表-std=c99 -O0, 													# $^此處代表sum.c main.c, $@此處代表$(TARGET)也就是run
 
 clean:
 	rm -f *.o
@@ -224,10 +224,10 @@ clean:
 
 ```
 PS D:\ccc\sp\code\c\04-toolchain\gcc\05-makeLib> mingw32-make
-ar -r libstat.a sum.o									# 先做ar把sum.o壓縮
-ar: creating libstat.a									# 創建libstat.a檔案
-gcc -std=c99 -O0 -c main.c -o main.o					# 用main.c產生main.o
-gcc -std=c99 -O0 libstat.a main.o -L ./ -lstat -o run	# 將libstat.a和main.o連結並輸出run
+ar -r libstat.a sum.o						# 先做ar把sum.o壓縮
+ar: creating libstat.a						# 創建libstat.a檔案
+gcc -std=c99 -O0 -c main.c -o main.o				# 用main.c產生main.o
+gcc -std=c99 -O0 libstat.a main.o -L ./ -lstat -o run		# 將libstat.a和main.o連結並輸出run
 ```
 
 ### 05-makeLib\Makefile之執行結果與探討
@@ -247,7 +247,7 @@ $(TARGET): $(LIB) main.o
 	$(CC) $(CFLAGS) $^ -L ./ -lstat -o $@
 
 $(LIB): sum.o
-	$(AR) -r $@ $^							# AR是把檔案壓縮起來變成函式庫的方式
+	$(AR) -r $@ $^						# AR是把檔案壓縮起來變成函式庫的方式
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -259,10 +259,10 @@ clean:
 * 執行結果:
 
 ```
-ar -r libstat.a sum.o									# 先做ar把sum.o壓縮
-ar: creating libstat.a									# 創建libstat.a檔案
-gcc -std=c99 -O0 -c main.c -o main.o					# 用main.c產生main.o
-gcc -std=c99 -O0 libstat.a main.o -L ./ -lstat -o run	# 將libstat.a和main.o連結並輸出run
+ar -r libstat.a sum.o						# 先做ar把sum.o壓縮
+ar: creating libstat.a						# 創建libstat.a檔案
+gcc -std=c99 -O0 -c main.c -o main.o				# 用main.c產生main.o
+gcc -std=c99 -O0 libstat.a main.o -L ./ -lstat -o run		# 將libstat.a和main.o連結並輸出run
 ```
 * 執行順序:
 
