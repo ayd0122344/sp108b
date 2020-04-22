@@ -1,6 +1,6 @@
 # week7筆記
 
-## 03-fib 之筆記 - Fibonacci
+## 03-asmVm\gcc\03-fib 之筆記 - Fibonacci
 
 ### 執行方式
 
@@ -28,7 +28,7 @@ https://github.com/ccccourse/sp/tree/master/code/c/03-asmVm/gcc/03-fib?fbclid=Iw
 
 ![](https://github.com/ayd0122344/sp108b/blob/master/week7/Image/fib.png)
 
-## 04-inline 之筆記 - 內嵌組合語言寫法
+## 03-asmVm\gcc\04-inline 之筆記 - 內嵌組合語言寫法
 
 ### 執行方式
 
@@ -43,17 +43,15 @@ sum = 30
 
 ![](https://github.com/ayd0122344/sp108b/blob/master/week7/Image/inline.png)
 
-## 05-globalCall 之筆記 -使用全域變數時，變數可直接存取，不需要透過框架暫存器
+## 03-asmVm\gcc\05-globalCall 之筆記 -使用全域變數時，變數可直接存取，不需要透過框架暫存器
 
 ### 執行方式
 
 ```
-
 PS D:\ccc\sp\code\c\03-asmVm\gcc\05-globalcall> gcc -S globalCall.c -o globalCall.s
 PS D:\ccc\sp\code\c\03-asmVm\gcc\05-globalcall> gcc globalCall.c -o globalCall
 PS D:\ccc\sp\code\c\03-asmVm\gcc\05-globalcall> ./globalCall
 add(5, 8)=13
-
 ```
 
 * 重點部分節錄
@@ -81,7 +79,6 @@ _add:
 	ret
 	.def	___main;	.scl	2;	.type	32;	.endef
 	.section .rdata,"dr"
-
 ```
 
 ## 04-toolchain/gcc/01-toolchain - gcc的工具鏈
@@ -102,14 +99,12 @@ _add:
 $ gcc sum.o -o sum
 $ ./sum
 sum(10)=55
-
 ```
 
 4. 反組譯目的碼-將二進位碼轉成組合語言，但會和原本的組合語言有點出入，比如有些符號會消失。
 
 ```
 PS D:\ccc\book\sp\code\c\01-gcc\01-toolchain> objdump -d sum.o
-
 ```
 * 當指令集中的指令長度不固定，我們稱之為"變長指令集"。
 
@@ -169,5 +164,114 @@ $ gcc main.o sum.o -o run
 $ ./run
 ```
 
+## 04-toolchain/gcc/03-macroExpand - max.c為一個有巨集的c語言程式
 
+### 執行方式
 
+```
+PS D:\ccc\sp\code\c\04-toolchain\gcc\03-macroExpand> gcc -E max.c -o max.i
+PS D:\ccc\sp\code\c\04-toolchain\gcc\03-macroExpand> gcc max.c -o max
+PS D:\ccc\sp\code\c\04-toolchain\gcc\03-macroExpand> ./max
+c=5
+```
+
+`gcc -E max.c -o max.i`
+
+```
+-E 代表展開巨集然後輸出到max.i(通常巨集展開後的檔案附檔名為".i")
+```
+
+## 04-toolchain/gcc/04-make
+
+### 執行方式
+
+```
+PS D:\ccc\sp\code\c\04-toolchain\gcc\04-make> mingw32-make
+gcc -std=c99 -O0 sum.c main.c -o run
+PS D:\ccc\sp\code\c\04-toolchain\gcc\04-make> ./run
+sum(10)=55
+```
+
+### 04-make\Makefile之理解
+
+* Tips: 
+
+	* `$@`：目前的目標項目名稱。
+
+	* `$<`：代表目前的相依性項目。
+
+	* `$*`：代表目前的相依性項目，但不含副檔名。
+
+	* `$?`：代表需要重建（被修改）的相依性項目。
+
+```
+CC := gcc						# 前3行做定義變數的動作
+CFLAGS = -std=c99 -O0			# "O0"代表不做最佳化
+TARGET = run
+
+all: $(TARGET)					# 1.先執行all，遇到$(TARGET)去找對應值(run)
+
+$(TARGET): sum.c main.c			# 2.執行此行並觸發下一行的$(CC) $(CFLAGS) $^ -o $@動作
+	$(CC) $(CFLAGS) $^ -o $@	# $(CC)代表gcc, $(CFLAGS)代表-std=c99 -O0, 												# $^此處代表sum.c main.c, $@此處代表$(TARGET)也就是run
+
+clean:
+	rm -f *.o
+```
+
+## 04-toolchain/gcc/05-makeLib
+
+### 執行方式
+
+```
+PS D:\ccc\sp\code\c\04-toolchain\gcc\05-makeLib> mingw32-make
+ar -r libstat.a sum.o									# 先做ar把sum.o壓縮
+ar: creating libstat.a									# 創建libstat.a檔案
+gcc -std=c99 -O0 -c main.c -o main.o					# 用main.c產生main.o
+gcc -std=c99 -O0 libstat.a main.o -L ./ -lstat -o run	# 將libstat.a和main.o連結並輸出run
+```
+
+### 05-makeLib\Makefile之執行結果與探討
+
+* 程式碼:
+
+```
+CC := gcc
+AR := ar
+CFLAGS = -std=c99 -O0
+TARGET = run
+LIB = libstat.a
+
+all: $(TARGET)
+
+$(TARGET): $(LIB) main.o
+	$(CC) $(CFLAGS) $^ -L ./ -lstat -o $@
+
+$(LIB): sum.o
+	$(AR) -r $@ $^							# AR是把檔案壓縮起來變成函式庫的方式
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	rm -f *.o *.a
+```
+
+* 執行結果:
+
+```
+ar -r libstat.a sum.o									# 先做ar把sum.o壓縮
+ar: creating libstat.a									# 創建libstat.a檔案
+gcc -std=c99 -O0 -c main.c -o main.o					# 用main.c產生main.o
+gcc -std=c99 -O0 libstat.a main.o -L ./ -lstat -o run	# 將libstat.a和main.o連結並輸出run
+```
+* 執行順序:
+
+1. 做$(TARGET)觸發$(TARGET): $(LIB) main.o
+
+2. 做$(LIB)觸發$(AR) -r $@ $^所以執行`ar -r libstat.a sum.o`
+
+3. 做完AR也就是做完$(LIB)之後，回到$(TARGET): $(LIB) main.o來做main.o
+
+4. main.o觸發%.o: %.c做	$(CC) $(CFLAGS) -c $< -o $@ 動作 => `gcc -std=c99 -O0 -c main.c -o main.o`
+
+5. 然後回到$(TARGET): $(LIB) main.o做$(CC) $(CFLAGS) $^ -L ./ -lstat -o $@動作 => `gcc -std=c99 -O0 libstat.a main.o -L ./ -lstat -o run`
