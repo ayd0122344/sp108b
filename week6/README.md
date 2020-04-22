@@ -2,7 +2,7 @@
 
 ## 虛擬機:vm.c之筆記
 
-* vm.c程式碼理解順序
+### vm.c程式碼理解順序
 
 1. 指令記憶體、資料記憶體大小
 
@@ -20,11 +20,11 @@
 
 ![](https://github.com/ayd0122344/sp108b/blob/master/week6/Image/vmRun3.png)
 
-* 補充圖片
+### 補充圖片
 
 ![](https://github.com/ayd0122344/sp108b/blob/master/week6/Image/syntax.jpg)
 
-* 執行方式
+### 執行方式
 
 ```
     mingw32-make => 
@@ -34,7 +34,7 @@
     2) ./asm ../test/sum => ./vm ../test/sum.bin
 ```
 
-* 執行結果探討
+### 執行結果探討
 
 1. add.bin
 
@@ -46,7 +46,7 @@
 
 ![](https://github.com/ayd0122344/sp108b/blob/master/week6/Image/sumResult2.png)
 
-## 01-add之筆記
+## 03-asmVm/01-add之筆記
 
 * add.s & main.s產生方式
 
@@ -63,7 +63,7 @@ PS D:\ccc\sp\code\c\03-asmVm\gcc\01-add> gcc -fverbose-asm -S main.c -o main.s
 
 ```
 
-* 理解過程
+### 理解過程
 
  - add.s檔案觀察結果
 
@@ -71,7 +71,7 @@ PS D:\ccc\sp\code\c\03-asmVm\gcc\01-add> gcc -fverbose-asm -S main.c -o main.s
 
 ![](https://github.com/ayd0122344/sp108b/blob/master/week6/Image/addx86-2.png)
 
-* x86之堆疊- foorbar.c 執行與理解
+### x86之堆疊- foorbar.c 執行與理解
 
 * 產生方式
 
