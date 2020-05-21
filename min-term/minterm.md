@@ -44,15 +44,8 @@
 
 ## hackCPU
 
-## 以本學期組譯器: asm.c 之成果解說
+### 以本學期組譯器: asm.c 之成果來解說
 
-![](https://github.com/ayd0122344/sp108b/blob/master/week4/Image/asmPass1.png)
-
-![](https://github.com/ayd0122344/sp108b/blob/master/week4/Image/asmPass2.png)
-
-![](https://github.com/ayd0122344/sp108b/blob/master/week4/Image/asmParse.png)
-
-![](https://github.com/ayd0122344/sp108b/blob/master/week4/Image/asmCode2Bin.png)
-
+![](https://github.com/ayd0122344/sp108b/blob/master/week4/Image/PASS2.png)
 
 ## CPU0
