@@ -10,49 +10,32 @@
 
 * 組合語言在系統中角色如下圖所示：
 
+![](https://github.com/ayd0122344/sp108b/blob/master/minterm/Image/character.png)
 
 ## RISC-V
 
 * 
 
+## ARM
+
+* 
+
 ## x86 
 
-* ### 03-asmVm/01-add之筆記
+### 
 
-* add.s & main.s產生方式
+### 上課教材之03-asmVm/01-add之筆記
 
-```
-
-PS D:\ccc\sp\code\c\03-asmVm\gcc\01-add> gcc main.c add.c -o add
-PS D:\ccc\sp\code\c\03-asmVm\gcc\01-add> ./add
-add(5, 8)=13
-PS D:\ccc\sp\code\c\03-asmVm\gcc\01-add> gcc -S add.c -o add.s
-
-(有註解版本)
-PS D:\ccc\sp\code\c\03-asmVm\gcc\01-add> gcc -fverbose-asm -S add.c -o add.s
-PS D:\ccc\sp\code\c\03-asmVm\gcc\01-add> gcc -fverbose-asm -S main.c -o main.s
-
-```
-
-* 理解過程
-
- - add.s檔案觀察結果
+* add.s檔案理解結果
 
 ![](https://github.com/ayd0122344/sp108b/blob/master/week6/Image/addx86.png)
 
 ![](https://github.com/ayd0122344/sp108b/blob/master/week6/Image/addx86-2.png)
 
-* x86之堆疊- foorbar.c 執行與理解
+* x86之堆疊- foorbar.c 理解結果
 
- - 產生方式
-
-```
-
-連結網址: https://eli.thegreenplace.net/.../where-the-top-of-the...
-
-PS D:\ccc\sp\code\c\03-asmVm\gcc\00-foobar> gcc -fverbose-asm -S foobar.c -o foobar.s
-
-```
 ![](https://github.com/ayd0122344/sp108b/blob/master/week6/Image/x86stack.png)
 
 > 00-foobar、02-sum的組合語言與大部分同add.s的寫法，在此不再贅述。
+
+## CPU0
