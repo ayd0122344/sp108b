@@ -10,7 +10,7 @@
 
 * 組合語言在系統中角色如下圖所示：
 
-![](https://github.com/ayd0122344/sp108b/blob/master/minterm/Image/character.png)
+![](https://github.com/ayd0122344/sp108b/blob/master/min-term/image/character.jpg)
 
 ## RISC-V
 
