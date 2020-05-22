@@ -195,16 +195,6 @@ EOR    R0, R0, #3              ; 反轉 R0 中的位 0 和 1
 　<td>1</td>
   <td>0</td>
 　</tr>
-　<tr>
-　<td>1</td>
-　<td>0</td>
-  <td>1</td>
-　</tr>
-　<tr>
-　<td>1</td>
-　<td>1</td>
-  <td>0</td>
-　</tr>
 </table>
 
 
