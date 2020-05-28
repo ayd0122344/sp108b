@@ -36,6 +36,8 @@
 
 * C語言:系統程式的主力語言，現今也有人用C++或是Golan
 
+![](https://github.com/ayd0122344/sp108b/blob/master/week8/Image/chart.jpg)
+
 * 巨集:
 
     * 「巨集」這個詞的使用暗示著將小命令或動作轉化為一系列指令。
