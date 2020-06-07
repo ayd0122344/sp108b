@@ -359,7 +359,7 @@ int main(int argc, char *argv[]) {
   * sprintf內部運作<br>
   1. 將 path 放入cd %s 的 %s 中，成為第一個指令<br>
   2. 將目前指令 cmd 放入第二個 %s 成為第二個指令<br>
-  3. 將 pathFile 放入pwd>%s 的 %s 成為第三個指令
+  3. 將 pathFile 放入pwd>%s 的 %s 成為第三個指令<br><hr>
 
   * system(fullcmd);執行過程<br>
   1. (指令1)cd到上一個迴圈所讀取到的path.txt路徑。<br>
