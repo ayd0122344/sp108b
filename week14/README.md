@@ -215,18 +215,18 @@ $ gcc fecho1.c -o fecho1
 
 nan@20190116-01 MSYS /sp/sp2/os/03-fs/02-fecho
 $ ls
-a.txt  fecho1.c  fecho1.exe  fecho2.c  README.md---------b.txt不存在
+a.txt  fecho1.c  fecho1.exe  fecho2.c  README.md ------> b.txt不存在
 
 nan@20190116-01 MSYS /sp/sp2/os/03-fs/02-fecho
 $ ./fecho1
 
 nan@20190116-01 MSYS /sp/sp2/os/03-fs/02-fecho
 $ ls
-a.txt  b.txt  fecho1.c  fecho1.exe  fecho2.c  README.md---------編譯之後，發現b.txt不存在，於是創建
+a.txt  b.txt  fecho1.c  fecho1.exe  fecho2.c  README.md ------> 編譯之後，發現b.txt不存在，於是創建
 
 nan@20190116-01 MSYS /sp/sp2/os/03-fs/02-fecho
 $ cat b.txt
-Hello, File descriptor !---------b.txt的內容和a.txt內容相同!
+Hello, File descriptor ! ------> b.txt的內容和a.txt內容相同!
 ```
 ## sp2/os/03-fs/02-fecho/fecho2.c
 
@@ -300,14 +300,14 @@ int main(int argc, char *argv[]) {
 ```
 nan@20190116-01 MSYS /sp/sp2/os/04-myshell/v1
 $ ./myshell
-myshell:/sp/sp2/os/04-myshell/v1 $ ls------輸入ls會印出目前資料夾下的檔案
+myshell:/sp/sp2/os/04-myshell/v1 $ ls ------> 輸入ls會印出目前資料夾下的檔案
 myshell.c  myshell.exe  README.md
-myshell:/sp/sp2/os/04-myshell/v1 $ ls -l------輸入ls -l會印出目前資料夾下的檔案的詳細資訊
+myshell:/sp/sp2/os/04-myshell/v1 $ ls -l ------> 輸入ls -l會印出目前資料夾下的檔案的詳細資訊
 總用量 157
 -rw-r--r-- 1 nan None    389 六月    3 14:03 myshell.c
 -rwxr-xr-x 1 nan None 151639 六月    7 09:15 myshell.exe
 -rw-r--r-- 1 nan None   1082 六月    3 14:03 README.md
-myshell:/sp/sp2/os/04-myshell/v1 $ cat myshell.c------使用cat指令來印出myshell.c檔的內容
+myshell:/sp/sp2/os/04-myshell/v1 $ cat myshell.c ------> 使用cat指令來印出myshell.c檔的內容
 #include "../myshell.h"
 
 int main(int argc, char *argv[]) {
@@ -319,9 +319,9 @@ int main(int argc, char *argv[]) {
     system(cmd);                   // 執行命令
   }
 }
-myshell:/sp/sp2/os/04-myshell/v1 $ echo hello how are you------使用echo指令印出後面的字
+myshell:/sp/sp2/os/04-myshell/v1 $ echo hello how are you ------> 使用echo指令印出後面的字
 hello how are you
-myshell:/sp/sp2/os/04-myshell/v1 $ exit------使用exit離開，但v1此功能未建置完成所以沒有反應，所以使用ctrl+V離開程式
+myshell:/sp/sp2/os/04-myshell/v1 $ exit ------> 使用exit離開，但v1此功能未建置完成所以沒有反應，所以使用ctrl+V離開程式
 ```
 ## sp2/os/04-myshell/v2/myshell.c
 
@@ -340,7 +340,7 @@ int readText(char *file, char *text, int size) {
 int main(int argc, char *argv[]) {
   char ipath[SMAX], path[SMAX], cmd[SMAX], fullcmd[SMAX], pathFile[SMAX];
   getcwd(ipath, SMAX-1); // 取得初始路徑放到ipath,SMAX為ipath的空間大小
-  strcpy(path, ipath);   // 將ipath的內容複製到path => path = ipath
+  strcpy(path, ipath);   // 將ipath的內容複製到path => path = ipath。ipath用於記住初始路徑，並存放在path.txt中。
   sprintf(pathFile, "%s/path.txt", ipath); // 將第三個參數(ipath)的內容放入第二個參數("%s/path.txt"的%s位置)，最後存在第一個參數的字串中 => pathFile=<ipath>/path.txt
   while (1) { // 不斷等待使用者輸入命令並執行之
     printf("myshell:%s $ ", path); // 顯示提示訊息
@@ -348,13 +348,38 @@ int main(int argc, char *argv[]) {
     strtok(cmd, "\n");             // 切掉 \n (strtok第一個參數放字串，第二個參數放要消除的東西)
     if (strcmp(cmd, "exit")==0) break; // 設定如果指令為"exit"則離開迴圈結束程式
     sprintf(fullcmd, "cd %s;%s;pwd>%s", path, cmd, pathFile); // fullcmd = 切到 path; 使用者輸入的命令; 將路徑存入 pathFile 中。
-    system(fullcmd);               // 執行 fullcmd 
-    readText(pathFile, path, SMAX);// 讀 pathFile 檔取得路徑
+    system(fullcmd);               // 執行 fullcmd
+    readText(pathFile, path, SMAX);// 讀取路徑，並在下個迴圈一開始印出
     strtok(path, "\n");            // 切掉 \n
   }
 }
 ```
+* 無法正常運作之解決辦法: sprintf(fullcmd, "cd %s;%s;pwd>%s", path, cmd, pathFile);
+
+  * sprintf內部運作<br>
+  1. 將 path 放入cd %s 的 %s 中，成為第一個指令<br>
+  2. 將目前指令 cmd 放入第二個 %s 成為第二個指令<br>
+  3. 將 pathFile 放入pwd>%s 的 %s 成為第三個指令
+
+  * system(fullcmd);執行過程<br>
+  1. (指令1)cd到上一個迴圈所讀取到的path.txt路徑。<br>
+  2. (指令2)執行cmd(如果是cd指令一樣會切到目標路徑)。<br>
+  3. (指令3)將目前(可能是cd後)之路徑存入path.txt(此檔案可被父、子程式共用，解決了v1子程式執行後沒有記住路徑的問題)<br>
+  4. 由readText讀取路徑，此路徑會在下個迴圈錢字號前印出以及被下一個fullcmd中的指令1所使用。
+
 ### 執行結果
 ```
-
+myshell:/sp/sp2/os/04-myshell/v2 $ ls -l
+總用量 161
+-rw-r--r-- 1 nan None   1086 六月    3 14:03 myshell.c
+-rwxr-xr-x 1 nan None 154031 六月    7 09:50 myshell.exe
+-rw-r--r-- 1 nan None     22 六月    7 11:58 path.txt
+-rw-r--r-- 1 nan None   1330 六月    3 14:03 README.md
+myshell:/sp/sp2/os/04-myshell/v2 $ cd ..
+myshell:/sp/sp2/os/04-myshell $ ls -l     ------> 成功回到上一層目錄了!
+總用量 5
+-rw-r--r-- 1 nan None 101 六月    3 14:03 myshell.h
+-rw-r--r-- 1 nan None 847 六月    3 14:03 README.md
+drwxr-xr-x 1 nan None   0 六月    7 09:15 v1
+drwxr-xr-x 1 nan None   0 六月    7 09:50 v2
 ```
