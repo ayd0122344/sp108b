@@ -97,5 +97,5 @@ Idx Name          Size      VMA       LMA       File off  Algn
 
 * 程式中直接定義三個函數原型(add,sum,fib)，透過objdump做反組譯所得到的機器碼經過「一些處理」後放到jitCall.c檔中即可執行!
 
-* 註明: 「一些處理」會在習題的README.md中詳述~
-習題入口:
+* 註明: 「一些處理」會在習題的README.md中詳述~<br>
+[- 習題入口 -](https://github.com/ayd0122344/sp108b/tree/master/week9/%E7%BF%92%E9%A1%8C)
