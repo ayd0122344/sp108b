@@ -54,23 +54,23 @@ $ objdump -d power.o > power.dump
     2. 在main前宣告unsigned char類型的powerCode陣列中加入「一些處理」後的機器碼<br>
     ```
     unsigned char powerCode[] = {
-    0x55,                   				    //push   %ebp
-    0x89, 0xe5,                			        //mov    %esp,%ebp
-    0x83, 0xec, 0x10,             			    //sub    $0x10,%esp
+    0x55,                   				         //push   %ebp
+    0x89, 0xe5,                			         //mov    %esp,%ebp
+    0x83, 0xec, 0x10,             			      //sub    $0x10,%esp
     0xc7, 0x45, 0xfc, 0x01, 0x00, 0x00, 0x00, 	//movl   $0x1,-0x4(%ebp)
-    0xeb, 0x0e,                			        //jmp    1d <_power+0x1d>
-    0x8b, 0x45, 0x08,             			    //mov    0x8(%ebp),%eax
-    0x0f, 0xaf, 0x45, 0x08,          		    //imul   0x8(%ebp),%eax
-    0x89, 0x45, 0x08,             			    //mov    %eax,0x8(%ebp)
-    0x83, 0x45, 0xfc, 0x01,          		    //addl   $0x1,-0x4(%ebp)
-    0x8b, 0x45, 0xfc,             			    //mov    -0x4(%ebp),%eax
-    0x3b, 0x45, 0x0c,             			    //cmp    0xc(%ebp),%eax
-    0x7c, 0xea,                			        //jl     f <_power+0xf>
-    0x8b, 0x45, 0x08,             			    //mov    0x8(%ebp),%eax
-    0xc9,                   				    //leave  
-    0xc3,                   				    //ret    
-    0x90,                   				    //nop
-    0x90,                   				    //nop
+    0xeb, 0x0e,                			         //jmp    1d <_power+0x1d>
+    0x8b, 0x45, 0x08,             			      //mov    0x8(%ebp),%eax
+    0x0f, 0xaf, 0x45, 0x08,          		      //imul   0x8(%ebp),%eax
+    0x89, 0x45, 0x08,             			      //mov    %eax,0x8(%ebp)
+    0x83, 0x45, 0xfc, 0x01,          		      //addl   $0x1,-0x4(%ebp)
+    0x8b, 0x45, 0xfc,             			      //mov    -0x4(%ebp),%eax
+    0x3b, 0x45, 0x0c,             			      //cmp    0xc(%ebp),%eax
+    0x7c, 0xea,                			         //jl     f <_power+0xf>
+    0x8b, 0x45, 0x08,             			      //mov    0x8(%ebp),%eax
+    0xc9,                   				         //leave  
+    0xc3,                   				         //ret    
+    0x90,                   				         //nop
+    0x90,                   				         //nop
     };
     ```
     3. 在main()中加上以下程式段，完成! 
