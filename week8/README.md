@@ -106,11 +106,17 @@
 
 * 跳躍
 
+    * 使用N、Z值可以用來判斷比較結果<br>
+        1. `Ra>Rb` => N=0, Z=0 => Ra-Rb不是負的也不是0，那就是`Ra>Rb`<br>
+        2. `Ra<Rb` => N=1, Z=0 => Ra-Rb是負的但不是0，那就是`Ra<Rb` <br>
+        3. `Ra=Rb` => N=0, Z=1 => Ra-Rb不是負的但是0，那就是`Ra=Rb`<br>
+
     * ```LD R15,ADDR```       #將位址放如R15(程式計數器)，就相當於跳躍動作。
 
     * ```JMP [0x30]```        #使用相對定址的方式，若原本PC執行到002C的地方，經過此指令和加法運算就會得到新的PC值，也就是PC中跳躍的目的地——005C的地方。
 
-    * ```JLE [0x30]```        #跳躍之前要透過sw確認是否小於等於才可以跳。
+    * ```JLE [0x30]```        #跳躍之前要透過sw確認是否小於等於才可以跳。<br>
+        * SW=80 00 00 00也就是1000 0000 0000 0000 0000 0000 0000 0000 => N=1 而 Z=0判斷小於，再使用N=0, Z=1判斷等於，並以OR閘連接即可運行!
 
 * 立即定址
 
@@ -155,21 +161,89 @@
 
 ### CPU0組譯器-將組合語言轉換成目的檔
 
-* 組譯方式
+* 組譯過程: 通常分為兩階段，第一階段`計算符號位址`，第二階段`轉換`(轉換運算元、參數、資料)
+
+    * hackCPU不需要轉換資料的部分，因為全部用A指令取代
+
+* 組譯方式: 
 
     1. 絕對定址:直接使用指令或是編碼來執行組譯動作<br>
     E.g.(L型指令)
     ```LD  Ra,     [Rb  + Cx] ``` (syntax)
     ```LD  R1,             B  ```
-    ```00   1,      0    0010 ```
+    ```00   1,      0    0010 ```(組譯後)
 
     2. 相對定址:相對於PC的定址方式,要去計算目前為止跟目標的距離<br>
     E.g.(L型指令)
     ```LD  Rd,     [Ra  +   Cx]   ``` (syntax)
     ```LD  R1,     R15  +  (B-PC) ```
-    ```00   1,      F       000C  ```
+    ```00   1,      F       000C  ```(組譯後)
 
+### 連結與載入
 
+* C語言中的交互引用: 
 
+1. 使用extern告知程式到別的地方找尋此變數的定義<br>
+2. 使用global來讓參數可被外部程式引用<br>
+```
+extern int stack[];
+extern int top;
 
-    
+void push(int x){
+    stack[top++] = x; //當我們讀到stack的時候會知道它是一個外部參數，會暫時填0但會放一個修改紀錄，等到連結的時候再去修正機器碼中的此部分
+}
+
+int pop(){
+    return stack{--top};
+}
+```    
+* 連結器的功能:將很多目的檔、函式庫連結起來變成:
+
+    1. 執行檔 (lib)<br>
+    2. 函式庫 (exe)<br>
+    3. 動態函式庫(dll)
+
+* 連結時要注意 `區段合併`
+
+    * 程式段跟程式段(.text)<br>
+    * 資料段跟資料段(.data)<br>
+    * bss段跟bss段(.bss) - abbreviation of Block Started by Symbol
+
+* 連結完成時的執行檔就會有一個程式段、資料段跟bss段(各只有一個!)
+
+* 動態連結: 等到執行到某函數時再透過動態連結器去尋找並連結函式庫 => 不需要載入全部的函式庫，達到節省記憶體的目的!
+
+### 巨集處理器
+
+* 在組合語言中類似函數的功能，但不向函數需要呼叫，而是在程式中直接展開 => 可以節省寫程式的時間
+
+* 標記編號: 避免重複的名稱。每次碰到一個標記就直接在名稱後依序加上數字，第一個標記名稱後加1,第二個標記名稱後加2,..依此類推。
+
+* 條件式巨集展開: 在C語言中使用#ifdef，寫很多函數時常用到
+
+### 實作 - gdb 的除錯用法
+
+PS D:\ccc\sp\code\c\04-toolchain\gcc\07-gdb> gcc main.c add.c -o add -g
+PS D:\ccc\sp\code\c\04-toolchain\gcc\07-gdb> gdb32 -q add
+Reading symbols from add...done.
+(gdb) break 6 //在第六行加入中斷點
+Breakpoint 1 at 0x40135e: file main.c, line 6.
+(gdb) r  //開始執行(run)
+Starting program: D:\ccc\sp\code\c\04-toolchain\gcc\07-gdb\add.exe
+[New Thread 7152.0x1b6c]
+Breakpoint 1, main () at main.c:6
+6 int t = add(5, 8);
+(gdb) n  //按n可以往下進行一行
+7 printf("add(5, 8)=%d\n", t);
+(gdb) n
+add(5, 8)=13
+8 return 0;
+(gdb) n
+9 }(gdb) n
+0x004010fd in __mingw_CRTStartup ()
+(gdb) n
+Single stepping until exit from function __mingw_CRTStartup,
+which has no line number information.  //沒有下一行可以執行了
+[New Thread 7152.0x2240]
+[Inferior 1 (process 7152) exited normally]
+(gdb) quit   // 輸入quit可以離開
